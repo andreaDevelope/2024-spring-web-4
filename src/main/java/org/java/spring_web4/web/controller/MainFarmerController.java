@@ -34,11 +34,15 @@ public class MainFarmerController {
     @GetMapping("/test/add")
     public ResponseEntity<Void> testAdd(){
         // CREO FARMS E LE SALVO
-        Farm farm1 = new Farm("farm1", "Roma");
-        Farm farm2 = new Farm("farm2", "Napoli");
+        Farm farm1 = new Farm("Farm di Roma", "Roma");
+        Farm farm2 = new Farm("Farm di Napoli", "Napoli");
+        Farm farm3 = new Farm("Farm di Torino", "Torino");
+
 
         farmService.save(farm1);
         farmService.save(farm2);
+        farmService.save(farm3);
+
 
         // CREO FARMERS E LI SALVO
         Farmer farmer1 = new Farmer("Gigi", "La trottola", 20, farm1);

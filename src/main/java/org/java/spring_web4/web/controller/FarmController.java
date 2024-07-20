@@ -45,4 +45,17 @@ public class FarmController {
 
         return ResponseEntity.ok(farm);
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Farm> deleteFarm(@PathVariable int id){
+        Optional<Farm> optF = farmService.getById(id);
+        if (optF.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Farm f = optF.get();
+        farmService.delete(f);
+
+        return ResponseEntity.ok(f);
+    }
 }
