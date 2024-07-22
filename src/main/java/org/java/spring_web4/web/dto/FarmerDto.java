@@ -1,10 +1,13 @@
 package org.java.spring_web4.web.dto;
 
+import java.util.List;
+
 public class FarmerDto {
     private String name;
     private String surname;
     private int age;
     private int farmId;
+    private List<Integer> specs;
 
     public FarmerDto() {}
 
@@ -34,6 +37,16 @@ public class FarmerDto {
 
     public int getFarmId() {
         return farmId;
+    }
+
+    public List<Integer> getSpecs() {
+
+        return specs;
+    }
+
+    public void setSpecs(List<Integer> specs) {
+
+        this.specs = specs;
     }
 
     public void setFarmId(int farmId) {

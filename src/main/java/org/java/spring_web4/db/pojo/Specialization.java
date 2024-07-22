@@ -4,39 +4,33 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 
 @Entity
-public class Farm {
+public class Specialization {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = false)
     private String name;
 
-    @Column(nullable = false)
-    private String city;
-
-    @OneToMany(mappedBy = "farm", cascade = CascadeType.ALL)
     @JsonIgnore
+    @ManyToMany(mappedBy = "specializations")
     private List<Farmer> farmers;
 
-    public Farm(){
-
+    public Specialization() {
     }
 
-    public Farm(String name, String city){
-        setId(id);
+    public Specialization(String name) {
+
         setName(name);
-        setCity(city);
-        setFarmers(farmers);
     }
 
     public int getId() {
@@ -48,26 +42,31 @@ public class Farm {
     }
 
     public String getName() {
+
         return name;
     }
 
     public void setName(String name) {
+
         this.name = name;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public List<Farmer> getFarmers() {
+
         return farmers;
     }
 
     public void setFarmers(List<Farmer> farmers) {
+
         this.farmers = farmers;
+    }
+
+    @Override
+    public String toString() {
+
+        return "Specialization{\n" +
+                "\tid=" + id + ",\n" +
+                "\tname='" + name + "'\n" +
+                "}";
     }
 }

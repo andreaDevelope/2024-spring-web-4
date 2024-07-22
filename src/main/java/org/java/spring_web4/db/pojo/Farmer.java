@@ -1,5 +1,7 @@
 package org.java.spring_web4.db.pojo;
 
+import java.util.List;
+
 import org.java.spring_web4.web.dto.FarmerDto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -10,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -28,20 +31,23 @@ public class Farmer {
     private int age;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(nullable = false)
     private Farm farm;
+
+    @ManyToMany
+    private List<Specialization> specializations;
 
     public Farmer(){
 
     }
 
-    public Farmer(String name, String surname, int age, Farm farm){
+    public Farmer(String name, String surname, int age, Farm farm, List<Specialization> specializations){
         setId(id);
         setName(name);
         setSurname(surname);
         setAge(age);
         setFarm(farm);
+        setSpecializations(specializations);
     }
 
     // COTRUTTORE PER LA CLASSE DTO DI  FARMER
@@ -88,6 +94,19 @@ public class Farmer {
 
     public void setFarm(Farm farm) {
         this.farm = farm;
+    }
+
+    public List<Specialization> getSpecializations() {
+        return specializations;
+    }
+
+    public void setSpecializations(List<Specialization> specializations) {
+        this.specializations = specializations;
+    }
+
+    public void addSpecialization(Specialization specialization) {
+
+        specializations.add(specialization);
     }
     
     public void update(FarmerDto fd) {
